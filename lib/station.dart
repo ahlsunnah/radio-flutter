@@ -1,6 +1,5 @@
-/**
- * Station.dart A model class for API CALL
- */
+/// Station.dart A model class for API CALL
+
 class Station {
   final String id;
   final String name;
