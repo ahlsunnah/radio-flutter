@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var stations = List<Station>();
   bool isPlaying;
+  int index = -1;
 
   /* Get Stations from API and insert it to stations (List<Stations>) */
   getStations() {
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     getStations();
     audioStart();
-    playingStatus();
+    playingStatus(-1);
   }
 
   /* Build Stations List Widget */
@@ -44,31 +45,57 @@ class _MyAppState extends State<MyApp> {
         itemCount: stations.length,
         itemBuilder: (context, i) {
           /* Return custom row for each stations */
-          return _buildRow(stations[i]);
+          return _buildRow(stations[i], i);
         });
   }
 
   /* Build custom row for ListView */
-  Widget _buildRow(Station station) {
-    return Card(
-        child: ListTile(
-      leading: new CircleAvatar(
-        backgroundColor: Colors.transparent,
-        child: Image.network(URL + station.img),
-      ),
-      onTap: () {
-        FlutterRadio.playOrPause(url: station.url);
-        playingStatus();
-      },
-      subtitle: Text(
-        station.url,
-        style: TextStyle(fontSize: 12.0),
-      ),
-      title: Text(
-        station.name,
-        style: TextStyle(fontSize: 18.0),
-      ),
-    ));
+  Widget _buildRow(Station station, int index) {
+    if (this.index == index && this.index != -1) {
+      return Card(
+          child: ListTile(
+            leading: new CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.network(URL + station.img),
+            ),
+            onTap: () {
+              FlutterRadio.playOrPause(url: station.url);
+              playingStatus(index);
+            },
+            trailing: Icon(
+              Icons.pause_circle_filled,
+              size: 50,
+            ),
+            subtitle: Text(
+              station.url,
+              style: TextStyle(fontSize: 12.0),
+            ),
+            title: Text(
+              station.name,
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ));
+    } else {
+      return Card(
+          child: ListTile(
+            leading: new CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.network(URL + station.img),
+            ),
+            onTap: () {
+              FlutterRadio.playOrPause(url: station.url);
+              playingStatus(index);
+            },
+            subtitle: Text(
+              station.url,
+              style: TextStyle(fontSize: 12.0),
+            ),
+            title: Text(
+              station.name,
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ));
+    }
   }
 
   Future<void> audioStart() async {
@@ -79,9 +106,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: new AppBar(
-          title: const Text('Ahl-Sunnah Radio'),
+          title: const Text('راديو الإسلام'),
         ),
         body: _buildStations(),
       ),
@@ -89,10 +117,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   /* Set Play status */
-  Future playingStatus() async {
+  Future playingStatus(int index) async {
     bool isP = await FlutterRadio.isPlaying();
     setState(() {
       isPlaying = isP;
+      this.index = index;
     });
   }
 }
