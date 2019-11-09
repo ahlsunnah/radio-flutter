@@ -22,7 +22,7 @@ samples, guidance on mobile development, and a full API reference.
 
 # Sub - Tasks
 * [ ] Attractive UI, UI should be responsive with Play, Pause and Stop actions.
-* [ ] Abitlity to Add new-stations Manualy.
+* [ ] Ability to Add new-stations Manually.
 * [ ] Bottom Sheet to display current playing behaviors (playing, paused, stopped).
 
 # Version 0.1:

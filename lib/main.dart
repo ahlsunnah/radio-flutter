@@ -106,9 +106,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new Scaffold(
         appBar: new AppBar(
-          title: const Text('Ahl-Sunnah Radio'),
+          title: const Text('راديو الإسلام'),
         ),
         body: _buildStations(),
       ),
