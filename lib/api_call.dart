@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 
 const URL = "https://radio.ahlsunnah.dev";
 Future fetchStations() async {
-  final response =
-  await http.get(URL + '/stations/');
+  final response = await http.get(URL + '/stations/');
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON

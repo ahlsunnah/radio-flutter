@@ -1,7 +1,6 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
-import br.com.thyagoluciano.flutterradio.FlutterRadioPlugin;
 
 /**
  * Generated file. Do not edit.
@@ -11,7 +10,6 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
-    FlutterRadioPlugin.registerWith(registry.registrarFor("br.com.thyagoluciano.flutterradio.FlutterRadioPlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {
