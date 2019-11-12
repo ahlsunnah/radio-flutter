@@ -1,14 +1,11 @@
 import 'dart:convert';
 
-import 'package:ahlsunnah_radio_app_flutter/control_button.dart';
-import 'package:ahlsunnah_radio_app_flutter/station.dart' as prefix0;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'Station.dart';
 import 'api_call.dart';
-import 'control_button.dart';
 import 'flutter_radio.dart';
 
 void main() => runApp(new MyApp());
@@ -56,7 +53,6 @@ class _MyAppState extends State<MyApp> {
 
   /* Build custom row for ListView */
   Widget _buildRow(Station station, int index) {
-    if (this.index == index && this.index != -1) {
       return Card(
           child: ListTile(
         leading: new CircleAvatar(
@@ -70,7 +66,7 @@ class _MyAppState extends State<MyApp> {
           });
         },
         trailing: Icon(
-          Icons.pause_circle_filled,
+          this.index == index && this.index != -1 ? Icons.pause_circle_filled : null,
           size: 30,
         ),
         subtitle: Text(
@@ -82,29 +78,7 @@ class _MyAppState extends State<MyApp> {
           style: TextStyle(fontSize: 18.0),
         ),
       ));
-    } else {
-      return Card(
-          child: ListTile(
-        leading: new CircleAvatar(
-          backgroundColor: Colors.transparent,
-          child: Image.network(URL + station.img),
-        ),
-        onTap: () {
-          FlutterRadio.playOrPause(url: station.url).whenComplete(() {
-            playingStatus(index);
-            showBottomSheet(index);
-          });
-        },
-        subtitle: Text(
-          station.url,
-          style: TextStyle(fontSize: 12.0),
-        ),
-        title: Text(
-          station.name,
-          style: TextStyle(fontSize: 18.0),
-        ),
-      ));
-    }
+
   }
 
   Future<void> audioStart() async {
